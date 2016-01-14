@@ -1,0 +1,19 @@
+vector<int>[10] fibV; 
+
+int first = 0;
+int second = 1;
+int next = 0;
+
+for (int i = 0; i < rows(fibV); i++ ) {
+    if ( i <= 1 ) {
+        next = i;
+    } else {
+        next = first + second;
+        first = second;
+        second = next;
+    }
+    fibV[i] = next;
+}
+
+print("Vector with Fibonacci series, generated using looping");
+print(fibV);

@@ -1,0 +1,96 @@
+\section{Refleksion og perspektivering}
+\begin{frame}{Indhold}
+  \begin{itemize}
+    \item Konklusion
+    \item Forbedringsforslag
+    \item Udvidelse af systemet
+  \end{itemize}
+\end{frame}
+
+\subsection{Konklusion}
+\begin{frame}{Konklusion}
+  \framesubtitle{Er problemformuleringen løst?}
+  \[
+  \left[
+  \begin{minipage}{\textwidth}
+  \centering
+  \begin{minipage}{0.94\textwidth}
+  \textit{Hvordan designes og implementeres et system, i C\#, der kan give brugere lettere adgang til dagligvarebutikkernes tilbud integreret med indkøbslister og opskrifter imens det gøres mere overskueligt, at handle ind til aftensmad?}
+  \end{minipage} 
+  \end{minipage}                           
+    \right]
+\]
+\end{frame}
+\begin{frame}{Konklusion}
+  \framesubtitle{User stories og systemdefinition}
+    \begin{itemize}
+      \item User stories
+      \begin{itemize}
+        \item Acceptance
+      \end{itemize}
+      \item Systemdefinition
+      \begin{itemize}
+        \item \textit{.. anbefaler opskrifterne, baseret på bedømmelser .. og præferencer.}
+      \end{itemize}      
+    \end{itemize}
+\end{frame}
+
+\subsection{Forbedringsforslag}
+
+\begin{frame}{Forbedringsforslag}
+  \framesubtitle{Hvad kunne arbejdes videre på?}
+  \textbf{Billeder}
+  \begin{itemize}
+    \item Opskrifter
+    \item Tilbud
+    \item General grafik
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Forbedringsforslag}
+  \framesubtitle{Hvad kunne arbejdes videre på?}
+  \textbf{Indkøbslister}
+  \begin{figure}
+    \includegraphics<handout:1>[trim=0.2cm 0.2cm 0.2cm 2.2cm, clip, width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{images/listenu.png}
+     \includegraphics<handout:2>[trim=0.2cm 0.2cm 0.2cm 2.2cm, clip, width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{images/listeny.png}
+  \end{figure}
+  
+\end{frame}
+
+\begin{frame}{Forbedringsforslag}
+  \framesubtitle{Hvad kunne arbejdes videre på?}
+  \textbf{Tilbud}
+
+  \begin{figure}
+    \includegraphics<1>[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{images/Screenshots/Offersmp.png}
+  \end{figure}
+
+\end{frame}
+
+
+\begin{frame}[t]{Forbedringsforslag}
+  \framesubtitle{Hvad kunne laves om?}
+  \texttt{Nuværende API-data}
+  \hbox{\hspace{5 mm}\scalebox{0.55}{
+    \lstinputlisting{code/api/old.json}
+  }
+  }
+\end{frame}
+
+\begin{frame}[t]{Forbedringsforslag}
+  \framesubtitle{Hvad kunne laves om?}
+  \texttt{Forslag til præcisering af API-data}
+  \hbox{\hspace{5 mm}\scalebox{0.55}{
+    \lstinputlisting{code/api/new.json}
+  }
+  }
+\end{frame}
+
+\subsection{Programudvidelse}
+\begin{frame}{Programudvidelse}
+  \framesubtitle{Hvad kunne tilføjes?}
+  \begin{itemize}
+    \item Tøm køleskabet
+    \item Normalpriser for alle varer
+  \end{itemize}
+\end{frame}

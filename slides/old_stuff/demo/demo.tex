@@ -1,0 +1,76 @@
+\section{Implementering og demonstration}
+\begin{frame}{Implementering og demonstration}
+	\framesubtitle{Indhold}
+    \begin{itemize}
+    		\item \textbf{Implementering}
+    		\begin{itemize}
+		\item Model - Repræsentation af data
+		\item Controller - Relevant logik
+		\item View - Det brugeren ser
+        \end{itemize}
+        \vspace{12pt}
+        \item \textbf{Demonstration} 
+        \begin{itemize}
+        \item Typisk workflow        
+        \item Mobil udgave  
+        \end{itemize}        
+    \end{itemize}
+\end{frame}
+
+%% Model
+\subsection{Model}
+\begin{frame}{Model}
+	\framesubtitle{Indkøbslister}
+	\texttt{ShoppingList.cs}
+	\hbox{\hspace{5 mm}\scalebox{0.8}{
+	\lstinputlisting{code/model/ShoppingList.cs} }}	
+\end{frame}
+\begin{frame}{Model}
+	\framesubtitle{Varer}	
+	\texttt{Item.cs}
+	\hbox{\hspace{5 mm}\scalebox{0.8}{
+	\lstinputlisting{code/model/Item.cs}	}}
+\end{frame}
+
+%% Controller
+\subsection{Controller}
+\begin{frame}{Controller}
+	\begin{itemize}
+		\item CRUD - \texttt{Create()}, \texttt{Index()} og \texttt{Details()}, \texttt{Edit()}, \texttt{Delete()}
+		\item \texttt{DataBaseContext} giver adgang til model-laget
+		\vspace{15pt}
+		\item Tilføje og fjerne varer, tilbud og ingredienser
+		\item Kommunikation med API
+		\item Information til brugere
+	\end{itemize}
+	%Indsæt relevant kode måske? eller tab til VS 
+\end{frame}
+
+%% View
+\subsection{View}
+\begin{frame}{View}
+	\begin{itemize}
+		\item Overblik - \texttt{Index.cshtml}
+		\begin{itemize}
+			\item \texttt{foreach} der ittererer over alle objekterne fx indkøbslister
+			\item F.eks. indkøbslister, tilbud og opskrifter
+		\end{itemize}
+		\item Specifik objekter - \texttt{Details.cshtml}
+		\begin{itemize}
+			\item \texttt{foreach} der ittererer over eventuelle lister, som objektet har fx varer på en indkøbsliste
+			\item F.eks. en indkøbsliste eller opskrift
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection{Demonstration}
+\begin{frame}{Demonstration}
+	\framesubtitle{Typisk workflow}
+	\begin{itemize}
+	\item Oprette bruger
+	\item Bruge indkøbsliste og tilbud
+	\item Finde opskrift og lave min egen
+	\item Ændre mine præferencer
+	\end{itemize}
+	\href{http://james:8080}{Demonstration af ProjectFood}
+\end{frame}

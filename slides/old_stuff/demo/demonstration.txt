@@ -1,0 +1,35 @@
+* Model
+|
+* Controller
+|\
+| * DataBaseContext
+| |  
+| * CRUD i shoppinglist
+|/
+* Specialiserede metoder
+|
+* Kommunikation med API
+|
+* Information til brugere 
+|\
+| * RemoveItemFrom()
+| |
+| * GetOffersForItem()
+|/ 
+* View
+|
+* Demonstration
+|\   
+|  \
+|   * Oprette bruger 
+|   |
+|   * Bruge indkøbsliste
+|   * Vis mobil
+|   |
+|   * Vis mobil
+|   * Bruge opskrifter
+|   |
+|   * Ændre prefs
+|  /
+|/
+* END 

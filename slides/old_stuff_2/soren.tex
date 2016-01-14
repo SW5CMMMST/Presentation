@@ -1,0 +1,246 @@
+\subsection{Syntax Analysis}
+\begin{frame}{Creating and Traversing the Parse Tree}
+\framesubtitle{Visitor Pattern}
+	\begin{itemize}
+        \item ANTLR PT visitor
+        \item Our own AST visitor
+        \item Pretty Printer
+    \end{itemize}
+    \includegraphics[width=1\textwidth,height=0.5\textheight,keepaspectratio, , clip]{images/P4/AST.PNG}
+
+\end{frame}
+
+\subsection{Contextual Analysis}
+\begin{frame}[fragile,t]{Contextual Analysis}
+\framesubtitle{Module call}
+\begin{itemize}
+  \item Scope Checking
+  \item Type Checking
+\end{itemize}
+\begin{lstlisting}[caption=The creation of an instance of the Contextual analysis module and the call invoking it. ,frame=tlrb, basicstyle=\tiny, numbers=none]
+ContextualAnalyser contextualAnalyser = 
+  new ContextualAnalyser(inputFile, errors);
+
+abstractSyntaxTree = 
+  contextualAnalyser.ContextualAnalysis(abstractSyntaxTree);
+\end{lstlisting}
+
+
+\end{frame}
+\begin{frame}[fragile,t]{Contextual Analysis}
+
+\framesubtitle{The Module}
+
+\begin{lstlisting}[caption=The method called from main performing Scope and Type checking and also reporting errors. ,frame=tlrb, basicstyle=\tiny, numbers=none ]
+public BaseASTNode ContextualAnalysis(BaseASTNode abstractSyntaxTree) {
+  //Add potential imported function declarations
+  handleImports(abstractSyntaxTree);
+
+  //Scope check
+  SymbolTable symbolTable = new SymbolTable();
+  scopeCheck(abstractSyntaxTree, symbolTable);
+  //Type check
+  typeCheck(abstractSyntaxTree, symbolTable);
+
+  //Check for unused variables
+  errors.addAll(symbolTable.getUnusedVariables());
+
+  //Error Handling
+  ErrorReporter errorReporter = new ErrorReporter();
+  errorReporter.HandleErrors(errors, ErrorType.ALL);
+
+  return abstractSyntaxTree;
+}
+\end{lstlisting}
+\end{frame}
+
+\subsubsection{Scope Checking}
+\begin{frame}[fragile,t]{Scope Checking}
+\framesubtitle{Creating Variables}
+
+
+\begin{lstlisting}[caption=The visit method for visiting a DeclarationNode in the Scope checker. ,frame=tlrb, basicstyle=\tiny, numbers=none]
+@Override
+public Void VisitDeclarationNode(DeclarationNode node) {
+  Symbol tmpSym = symbolTable.currentScope().resolve(node.getVariable().getId());
+  if (tmpSym != null) {
+    errors.add(new ReDeclarationError(node.getVariable(), tmpSym, symbolTable.currentScope(), node.getLineNumber()));
+  } else {
+      node.setScope(symbolTable.currentScope());
+      symbolTable.currentScope().define(node.getVariable(), node.getLineNumber());
+  }
+  if (node.getVariable().isComplex() && node.getVariable().getDynamicSize() != null){
+    visit(node.getVariable().getDynamicSize()[0]);
+    visit(node.getVariable().getDynamicSize()[1]);
+  }
+  return super.VisitDeclarationNode(node);
+}
+\end{lstlisting}
+
+\end{frame}
+
+\subsubsection{Type Checking}
+\begin{frame}[fragile,t]{Type Checking}
+\framesubtitle{Using Expressions}
+
+
+\begin{lstlisting}[caption=The visit method for visiting a ExpressionNode in the Type checker. ,frame=tlrb, basicstyle=\tiny, numbers=none]
+@Override
+public Variable VisitExpressionNode(ExpressionNode node) {
+  ValueType valueType = TypeChecker.CombineValueTypes(
+    node.getLValue() != null ? visit(node.getLValue()) : null,
+    node.getRValue() != null ? visit(node.getRValue()) : null,
+    errors,
+    node.getLineNumber()
+  );
+
+  node.setValueType(valueType);
+
+  /* ... */
+
+  return new Variable(valueType, "Expr:<" + node.toString() + ">");
+}
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Type Checking}
+\framesubtitle{Using Expressions}
+
+\begin{lstlisting}[caption=The method checking if two types are compatible according to the specification of GAMBL ,frame=tlrb, basicstyle=\tiny, numbers=none]
+public static ValueType CombineValueTypes(Variable lValue, Variable rValue, ArrayList<LanguageError> errors, int lineNum) {
+  if (lValue == null) {
+  return ValueType.INVALID;
+  } else if (rValue == null) {
+    return lValue.getValueType();
+  } else {
+    if (rValue.isFunction() && rValue.getId().equals("fileToMatrix"))
+      return lValue.getValueType();
+    
+    ValueType combined = compatibleTypes(
+      lValue.getEntrance() != null ? 
+        ComplexToSimple(lValue.getValueType()) : lValue.getValueType(),
+      rValue.getEntrance() != null ? 
+        ComplexToSimple(rValue.getValueType()) : rValue.getValueType());
+    if (combined != ValueType.INVALID) {
+      return combined;
+    } else {
+      errors.add(new TypeMismatchError(lValue, rValue, lineNum));
+      return ValueType.INVALID;
+    }
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+\subsection{Code Generation}
+\begin{frame}[fragile,t]{Code Generation}
+\framesubtitle{Module Call}
+\begin{itemize}
+  \item Compile to OpenCL C,
+  \item Use GPU by using templates.
+\end{itemize}
+
+\begin{lstlisting}[caption=The creation of an instance of the Code Generation module and the call invoking it ,frame=tlrb, basicstyle=\tiny, numbers=none]
+CodeGenerator codeGenerator = new CodeGenerator();
+codeGenerator.GenerateCodeAndWriteToFile(abstractSyntaxTree);
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Code Generation}
+\framesubtitle{The Module Method}
+
+\begin{lstlisting}[caption=The method called from main performing Code Generation and exporting the files generated along with the needed libraries.,frame=tlrb, basicstyle=\tiny, numbers=none]
+public void GenerateCodeAndWriteToFile(BaseASTNode abstractSyntaxTree) {
+  FileHandling filesNstuff = new FileHandling();
+  StringBuilder output = new StringBuilder();
+
+  abstractSyntaxTree.accept(new CodeGeneratorVisitor(output));
+
+  filesNstuff.WriteToFile(
+    filesNstuff.GetFileForOutputCode("code.c", "codeout/"),
+    output);
+
+  filesNstuff.ExportResource("simpleCL.h", "codeout/");
+  filesNstuff.ExportResource("simpleCL.c", "codeout/");
+  filesNstuff.ExportResource("complexTypes.h", "codeout/");
+  filesNstuff.ExportResource("Makefile", "codeout/");
+  filesNstuff.ExportResource("gambleStdlib.c", "codeout/");
+  filesNstuff.ExportResource("gambleStdlib.h", "codeout/");
+}
+
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Code Generation}
+\framesubtitle{Generating the For loop}
+
+\begin{lstlisting}[caption=The visit method called generating code for the for loop.,frame=tlrb, basicstyle=\tiny, numbers=none]
+@Override
+public String VisitForLoopNode(ForLoopNode node) {
+  StringBuilder forLoop = new StringBuilder();
+  forLoop.append("for(");
+  if (node.getInitialize() != null)
+    forLoop.append(visit(node.getInitialize()) + " ");
+  else
+    forLoop.append("; ");
+  if (node.getCondition() != null)
+   forLoop.append(visit(node.getCondition()));
+  forLoop.append("; ");
+  if (node.getUpdate() != null)
+    forLoop.append(visit(node.getUpdate()));
+  forLoop.append(") {\n");
+  forLoop.append(statementBody(node.getBody().getChildren()));
+  forLoop.append(indent("}\n"));
+
+  return forLoop.toString();
+}
+
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile,t]{Code Generation}
+\framesubtitle{Template for entry checking}
+\begin{lstlisting}[caption=The template for checking if an entry is out of bounds in a matrix.,frame=tlrb, basicstyle=\tiny, numbers=none]
+if(§ROW§ < §MATRIX§.rows && §COL§< §MATRIX§.cols) {
+  §CODE§
+} else {
+  printf("\nTrying to access entry out of bounds in %s\n", "§MATRIX§");
+  exit(0);
+}
+
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile,t]{Code Generation}
+\framesubtitle{Replacing in the template}
+\begin{lstlisting}[caption=The visit method called generating code for the for loop.,frame=tlrb, basicstyle=\tiny, numbers=none]
+@Override
+private String applyBoundsCheck(Variable variable, String code) {
+  return filesNstuff
+    .ImportStringFromResource("codesnippets/matrixOutOfBounds.c")
+    .replaceAll("§ROW§", visit(variable.getEntrance().getCoordinates()[0]))
+    .replaceAll("§COL§",
+      variable.getEntrance().getCoordinates()[1] != null ?
+      visit(variable.getEntrance().getCoordinates()[1]) : "0")
+    .replaceAll("§MATRIX§", variable.getId())
+    .replaceAll("§CODE§", code)
+    .replaceAll("\\n", "\n" + indent(""));
+}
+
+\end{lstlisting}
+
+\end{frame}
+
+
+
+
+
+
+
