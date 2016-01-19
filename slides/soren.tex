@@ -66,7 +66,7 @@ Completely Connected Reliable Communication (CCRC).
 \end{figure}
 Strongly Connected Reliable Communication (SCRC).
 }
-\only<5>{
+\only<6>{
 \begin{figure}
 \centering
 \begin{tikzpicture} [
@@ -92,7 +92,7 @@ Strongly Connected Reliable Communication (SCRC).
 Strongly Connected Unreliable Communication (SCUC).
 }
 
-\only<6>{
+\only<5>{
 \begin{figure}
 \centering
 \begin{tikzpicture} [
@@ -125,6 +125,7 @@ Completely Connected Unreliable Communication (CCUC).
 
 \begin{frame}{Time Division Multiple Access(TDMA)}
 \subsection{TDMA Problem}
+\framesubtitle{The generic method}
 \begin{itemize}
 	\item One frequency.
 	\item Using the frequency in turns.
@@ -174,7 +175,9 @@ For our project:
 	\end{itemize}
 \end{frame}
 
+\section{CCRC}
 \begin{frame}{Design of CCRC}
+\framesubtitle{Changes from generic TDMA}
 
 \begin{itemize}
 	\item The TDMA solution for CCRC.
@@ -217,6 +220,8 @@ For our project:
     \node[text width=1cm, align=center] at (-0.35,4.5) {Address};
     \node[text width=1cm, align=center] at (3.3,4.5) {Data};
     
+    \path (5,-1) -- node{\textbf{(a)} Figure is not to scale} (-5,0);
+
 \end{tikzpicture}
 \end{figure}
 \begin{itemize}
