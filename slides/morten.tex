@@ -1,4 +1,22 @@
-\section{CCUC}
+\section{Simultaneous connect}
+\subsection{Multiple Startup}
+\begin{frame}{Multiple Startup}
+  \begin{itemize}
+    \item CCUC assumptions
+    \item Message redundancy
+    \item Multiple connect
+  \end{itemize}
+\end{frame}
+
+\subsection{Multiple Connect}
+\begin{frame}{Multiple Connect}
+  \begin{itemize}
+    \item CCUC assumptions
+    \item Message redundancy
+    \item Multiple connect
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Overview}
   \begin{itemize}
     \item CCUC assumptions
@@ -11,23 +29,51 @@
 The CCUC-problem describes a completely connected graph but in this scenario there is not a guarantee that the transmission will be received; all devices are still in the range of each other.
 \end{frame}
 
-\begin{frame}
-\begin{definition}
-	The CCUC-problem:
-	\begin{align*}
-		\text{for all } v_i, v_j \in V \text{ where } v_i \neq v_j \text{ there exists an edge } (v_i, v_j) \in E.
-	\end{align*}
-\end{definition} 
-\end{frame}
+\section{CCUC}
+\subsection{CCUC Solution}
 
-\begin{frame}{Message redundancy}
-
-\end{frame}
-
-\begin{frame}{Multiple connect}
+\begin{frame}{CCUC Improvements}
+\framesubtitle{Message Redundancy}
+\only<1>{
   \begin{itemize}
-    \item CCUC assumptions
-    \item Message redundancy
-    \item Multiple connect
+    \item Pros
+      \begin{itemize}
+    	\item Increases reliability
+    	\item Simple to implement
+  	  \end{itemize}
+    \item Cons
+      \begin{itemize}
+    	\item Time consuming
+    	\item Naïve solution
+  	  \end{itemize}
   \end{itemize}
+}
+\only<2>{
+\begin{figure}
+\centering
+\begin{tikzpicture}  [
+        node distance = 1 cm, 
+        vertex/.style = {circle, draw, fill=blue!10}, 
+        label/.style = {fill=white},
+        block/.style = {rectangle, draw, fill=orange!40, minimum height = 5mm, minimum width = 20mm},
+        <->
+    ]
+
+    \node[draw=none](0){};
+    \node[vertex, above =     of 0]   (2) {$v_1$};
+    \node[block,  below = 9mm of 2]   (1) {};
+    \node[vertex, right = 2cm of 0]   (3) {$v_2$};
+    \node[vertex, below =     of 0]   (4) {$v_3$};
+    
+    \draw (2) -- (3);
+    \draw (3) -- (4);
+    \draw (1) -- (2);
+    \draw (1) -- (4);
+%    \draw (2) -- (4);
+%    \draw (3) -- (4);
+
+\end{tikzpicture}
+\end{figure}
+Text here
+}
 \end{frame}
