@@ -1,1 +1,114 @@
-\section{Claus}
+\section{Model-driven Development}
+\begin{frame}{Model-Driven Software Development (MDD)}
+
+	\begin{columns}[T]
+		\begin{column}{.48\textwidth}
+			\centering
+			Classic Software Development
+			
+			\begin{tikzpicture}[every node/.style={draw, minimum width = 50}, >=stealth]
+				\node(model){Model};
+				\node[below of=model](code){Code};
+				\draw[->, transform canvas={xshift=-10}](model) -- (code);
+				\draw[->, transform canvas={xshift= 10}](code) -- (model);
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{.48\textwidth}
+			\centering	
+			Model-driven Software Development
+			
+			\begin{tikzpicture}[every node/.style={draw, minimum width = 50}, >=stealth]
+				\node(model){Model};
+				\node[below of=model](generator){Compiler};
+				\node[below of=generator](code){Code};
+				\draw[->](model) -- (generator);
+				\draw[->](generator) -- (code);
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+	
+	\pause
+	
+	Advantages
+	
+	\begin{itemize}
+		\item<+-> Better abstraction
+		\item<+-> Models are easier to check for logical errors
+		\item<+-> Models are easier to understand for non-programmers
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Model-Driven Software Development (MDD)}
+	\framesubtitle{Our approch}
+	
+	{\centering
+	\begin{tikzpicture}[
+			node distance = 75, 
+			every node/.style={align=center, draw, minimum width=60, minimum height=30},
+			>=stealth]
+	
+		\node(design) at (0,0) {Design};
+		\node[rounded corners, fill = blue!20](model) at (4.5,0) {Model};
+		\node(generation) at(1.5,-2){Code\\Generation};
+		\node[rounded corners, fill = blue!20](code) at (4.5,-2){Code};
+		\node(evaluation) at (-1.5,-2) {Evaluation};
+	
+		\draw[->] (design) -- (model);
+		\draw[->] (generation) -- (code);
+		
+		\draw[->] (design) to[bend left] (generation);
+		\draw[->] (generation) to[bend left] (evaluation);
+		\draw[->] (evaluation) to[bend left] (design);
+		
+		\draw[->] (model) -| +(1.5,-3) -| (evaluation);
+		\draw (code) -- +(1.5,0);
+	\end{tikzpicture}
+	}
+\end{frame}
+
+
+\begin{frame}{Model-Driven Software Development (MDD)}
+	\framesubtitle{Reasoning}
+	What is our reasoning?
+	\begin{itemize}
+		\item Models are easier to check for logical errors
+		\item This also applies to model-model interaction
+		\bigskip
+		\item There exists tools to help with model checking
+	\end{itemize}
+\end{frame}
+
+\section{Model checking}
+\begin{frame}{Model checking}
+	General about model checking
+
+	How it is done
+\end{frame}
+
+\subsection{UPPAAL}
+\begin{frame}{Model checking}
+	\framesubtitle{UPPAAL}
+	
+	
+	
+	\begin{block}{Description}
+		\footnotesize 
+		``Uppaal is an integrated tool environment for modeling, 
+		validation and verification of real-time systems modeled as networks of timed automata, 
+		extended with data types (bounded integers, arrays, etc.).''\footnote{http://www.uppaal.org/}
+	\end{block}
+\end{frame}
+\begin{frame}{Model checking}
+	\framesubtitle{UPPAAL models}
+	Represented as automatas
+	
+	\includegraphics[width=0.6\textwidth]{images/P.png}
+\end{frame}
+
+\subsection{SMC}
+\begin{frame}{Model checking}
+	\framesubtitle{Statistical Model Checking (SMC)}
+	The need
+	
+	What it does
+\end{frame}

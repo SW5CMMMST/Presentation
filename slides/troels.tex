@@ -1,1 +1,48 @@
-\section{Troels}
+\section{Implementation}
+    \subsection{Automated Code Generation}
+    \begin{frame}[t]{Code Generation From Model}\framesubtitle{Hello World!}
+        Ideally
+        \begin{enumerate}
+            \item Make model,
+            \item Verify it,
+            \item ??? (Automated Code Generation),
+            \item Implementation is over.
+        \end{enumerate}
+        \bigskip
+        \begin{itemize}
+            \item <2->Assuming the 3rd step is correct then it will work, because the model works!
+            \item <3->However this is a \textcolor{orange}{difficult} problem, and code generation will be done manually. 
+        \end{itemize}
+    \end{frame}
+    \subsection{Implementing for the Arduino}
+    \begin{frame}[t]{Implementing for the Arduino}\framesubtitle{Platform and toolchain}
+        \begin{itemize}
+            \item C/C++-like language,
+            \item $< 500$ LOC,
+            \item Uses a Library (RadioHead) to communicate,
+            \item Relatively simple to make given the model,
+            \item Hardest problem being synchronization related,
+            \item Uses 8560 bytes out of 32256 bytes of storage (26 \%),
+            \item Uses 672 bytes of 2048 bytes of memory (32 \%).
+        \end{itemize}
+
+        \begin{figure}[h]
+            \centering
+            \missingfigure[figheight=3cm]{dank figure / image?}
+            \caption{Some caption}
+            \label{nicefigure}
+        \end{figure}
+        
+
+    \end{frame}
+\section{Demonstration}
+    \begin{frame}[t]{Demonstration}
+        \begin{itemize}
+            \item 4 (?) devices,
+            \item Usercode!
+            \item Can start multiple at the same time,
+            \item Green LED on while sending (200 ms),
+            \item Red LED on while receiving (200 ms),
+            \item Multiple buttons turning on LEDs/actuators.
+        \end{itemize}
+    \end{frame}
