@@ -14,6 +14,7 @@
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{.48\textwidth}
+			\pause
 			\centering	
 			Model-driven Software Development
 			
@@ -38,7 +39,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Model-Driven Software Development (MDD)}
+\begin{frame}[t]{Model-Driven Software Development (MDD)}
 	\framesubtitle{Our approch}
 	
 	{\centering
@@ -64,27 +65,20 @@
 		\draw (code) -- +(1.5,0);
 	\end{tikzpicture}
 	}
-\end{frame}
-
-
-\begin{frame}[t]{Model-Driven Software Development (MDD)}
-	\framesubtitle{Reasoning}
+	
+	\smallskip
+	
+	\pause
 	What is our reasoning?
 	\begin{itemize}
-		\item Models are easier to check for logical errors
-		\item This also applies to model-model interaction
+		\item<+-> Models are easier to check for logical errors
+		\item<+-> This also applies to model-model interaction
 		\bigskip
-		\item There exists tools to help with model checking
+		\item<+-> There exists tools to help with model checking
 	\end{itemize}
 \end{frame}
 
 \section{Model checking}
-\begin{frame}[t]{Model checking}
-	General about model checking
-
-	How it is done
-\end{frame}
-
 \subsection{UPPAAL}
 \begin{frame}[t]{Model checking}
 	\framesubtitle{UPPAAL}
@@ -95,24 +89,39 @@
 		validation and verification of real-time systems modeled as networks of timed automata, 
 		extended with data types (bounded integers, arrays, etc.).''\footnote{http://www.uppaal.org/}
 	\end{block}
-\end{frame}
-\begin{frame}[t]{Model checking}
-	\framesubtitle{UPPAAL models}
-	Represented as automatas
 	
-	\includegraphics[trim=0 200 0 200,width=0.6\textwidth]{images/P.pdf}
-	
-	Querys
-	
-		{
-		\texttt{A[] forall (i:id\_t) forall (j:id\_t) P(i).cs && P(j).cs imply i == j}
-		}
+	\begin{columns}[T]
+		\begin{column}{.48\textwidth}
+			\begin{itemize}
+				\item Represented as automatas
+				\item Querys can check for errors
+			\end{itemize}
+		\end{column}
+		\begin{column}{.48\textwidth}
+			\includegraphics[trim=0 200 0 200,width=0.90\textwidth]{images/P.pdf}
+		\end{column}
+	\end{columns}
+	\medskip
+	\texttt{A[] forall (i:id\_t) forall (j:id\_t) P(i).cs \&\& P(j).cs imply i == j}
 \end{frame}
 
 \subsection{SMC}
 \begin{frame}[t]{Model checking}
 	\framesubtitle{Statistical Model Checking (SMC)}
-	Some properties can not be guarenteed
 	
-	What are the chances of these properties being true?
+	\begin{columns}[T]
+		\begin{column}{.48\textwidth}
+			Some great thing
+			
+			\begin{itemize}
+				\item<+-> Some properties can not be guarenteed
+				\item<+-> What are the chances of those being true?
+			\end{itemize}
+		\end{column}
+		\begin{column}{.48\textwidth}
+			\includegraphics[trim=0 200 0 200,width=0.8\textwidth]{images/Simple_SMC.pdf}
+		\end{column}
+	\end{columns}
+	\\[3cm]
+	\texttt{Pr[<=300000] (<> exists (i : id\_t) Coin(i).Tails)}
 \end{frame}
