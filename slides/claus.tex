@@ -48,7 +48,7 @@
 			every node/.style={align=center, draw, minimum width=60, minimum height=30},
 			>=stealth]
 	
-		\node(design) at (0,0) {Design};
+		\node(design) at (-1.5,0) {Design};
 		\node[rounded corners, fill = blue!20](model) at (4.5,0) {Model};
 		\node(generation) at(1.5,-2){Code\\Generation};
 		\node[rounded corners, fill = blue!20](code) at (4.5,-2){Code};
@@ -57,9 +57,8 @@
 		\draw[->] (design) -- (model);
 		\draw[->] (generation) -- (code);
 		
-		\draw[->] (design) to[bend left] (generation);
-		\draw[->] (generation) to[bend left] (evaluation);
-		\draw[->] (evaluation) to[bend left] (design);
+		\draw[->] (design) -| (generation);
+		\draw[->] (evaluation) -- (design);
 		
 		\draw[->] (model) -| +(1.5,-3) -| (evaluation);
 		\draw (code) -- +(1.5,0);
