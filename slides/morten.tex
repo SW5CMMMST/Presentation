@@ -1,6 +1,5 @@
 \section{Simultaneous connect}
-\subsection{Multiple Startup}
-\begin{frame}{Multiple Startup}
+\begin{frame}{Simultaneous connect}
   \begin{itemize}
     \item CCUC assumptions
     \item Message redundancy
@@ -8,30 +7,22 @@
   \end{itemize}
 \end{frame}
 
-\subsection{Multiple Connect}
-\begin{frame}{Multiple Connect}
-  \begin{itemize}
-    \item CCUC assumptions
-    \item Message redundancy
-    \item Multiple connect
-  \end{itemize}
+\begin{frame}{Simultaneous connect}
+\framesubtitle{Model Performance}
+  \begin{figure}[ht]
+  \includegraphics[width=1\textwidth]{images/graph.pdf} 
+\caption{Graph of the UPPAAL SMC queries, in which the cumulative probability increase over time. With 99.9 \% confidence and five devices.}
+\label{fig:ConnectQueryTime}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Overview}
-  \begin{itemize}
-    \item CCUC assumptions
-    \item Message redundancy
-    \item Multiple connect
-  \end{itemize}
-\end{frame}
+\section{CCUC}
 \subsection{CCUC assumptions}
 \begin{frame}{CCUC assumptions}
 The CCUC-problem describes a completely connected graph but in this scenario there is not a guarantee that the transmission will be received; all devices are still in the range of each other.
 \end{frame}
 
-\section{CCUC}
 \subsection{CCUC Solution}
-
 \begin{frame}{CCUC Improvements}
 \framesubtitle{Message Redundancy}
 \only<1>{
