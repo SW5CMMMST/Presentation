@@ -55,8 +55,7 @@ The CCUC-problem describes a completely connected graph but in this scenario the
         node distance = 1 cm, 
         vertex/.style = {circle, draw, fill=blue!10}, 
         label/.style = {fill=white},
-        block/.style = {rectangle, draw, fill=orange!40, minimum height = 5mm, minimum width = 20mm},
-        <->
+        block/.style = {rectangle, draw, fill=orange!40, minimum height = 5mm, minimum width = 20mm}
     ]
 
     \node[draw=none](0){};
@@ -65,15 +64,14 @@ The CCUC-problem describes a completely connected graph but in this scenario the
     \node[vertex, right = 2cm of 0]   (3) {$v_2$};
     \node[vertex, below =     of 0]   (4) {$v_3$};
     
-    \draw (2) -- (3);
-    \draw (3) -- (4);
-    \draw (1) -- (2);
-    \draw (1) -- (4);
-%    \draw (2) -- (4);
-%    \draw (3) -- (4);
+    \draw [<->] (2) -- (3);
+    \draw [<->] (3) -- (4);
+    \draw [->] 	(1) -- (2);
+    \draw [->] 	(1) -- (4);
+    \draw [opacity=0.5] (1.south) -- (1.north);
 
 \end{tikzpicture}
 \end{figure}
-Text here
+Likely real world scenario
 }
 \end{frame}
