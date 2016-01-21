@@ -3,27 +3,27 @@
     \begin{frame}[t]{Code Generation From Model}\framesubtitle{Model Driven Development}
         Ideally
         \begin{enumerate}
-            \item Make model,
-            \item Verify it,
-            \item ??? (Automated Code Generation),
-            \item Implementation is over.
+            \item Make model
+            \item Verify it
+            \item ??? (Automated Code Generation)
+            \item Implementation is over
         \end{enumerate}
         \bigskip
         \begin{itemize}
             \item <2->Assuming the 3rd step is correct then it will work, because the model works!
-            \item <3->However this is a \textcolor{orange}{difficult} problem, and code generation will be done manually. 
+            \item <3->However this is a \textcolor{orange}{difficult} problem, and code generation will be done manually 
         \end{itemize}
     \end{frame}
     \subsection{Implementing for the Arduino}
     \begin{frame}[t]{Implementing for the Arduino}\framesubtitle{Platform and toolchain}
         \begin{itemize}
-            \item C/C++-like language,
-            \item $< 500$ LOC,
-            \item Uses a Library (RadioHead) to communicate,
-            \item Relatively simple to make given the model,
-            \item Hardest problem being synchronization related,
-            \item Uses 8560 bytes out of 32256 bytes of storage (26 \%),
-            \item Uses 672 bytes of 2048 bytes of memory (32 \%).
+            \item C/C++-like language
+            \item $< 500$ LOC
+            \item Uses a Library (RadioHead) to communicate
+            \item Relatively simple to make given the model
+            \item Hardest problem being synchronization related
+            \item Uses 8560 bytes out of 32256 bytes of storage (26 \%)
+            \item Uses 672 bytes of 2048 bytes of memory (32 \%)
         \end{itemize}
 
     \end{frame}
@@ -31,18 +31,18 @@
         \begin{itemize}
             \item \texttt{void userCodeRunonce()}
             \begin{itemize}
-                \item Once pr. time-slot.
-                \item WCET must be less than the time set to execute user code in.
+                \item Once pr. time-slot
+                \item WCET must be less than the time set to execute user code in
             \end{itemize}
             \item \texttt{void userCodeRepeat()}
             \begin{itemize}
-                \item Used to fill the rest of the user code execution time.
-                \item WCET must be less than the guard time before transmitting.
+                \item Used to fill the rest of the user code execution time
+                \item WCET must be less than the guard time before transmitting
             \end{itemize}
             \item \texttt{void userSensorPoll()}
             \begin{itemize}
-                \item Can be enabled to pool sensor while receiving,
-                \item WCET should be short i.e. sub-millisecond. 
+                \item Can be enabled to pool sensor while receiving
+                \item WCET should be short i.e. sub-millisecond
             \end{itemize}
         \end{itemize}
 
@@ -52,12 +52,12 @@
     \subsection{Remote}
     \begin{frame}[t]{Demonstration}\framesubtitle{Remote controlled presentation.}
         \begin{itemize}
-            \item 2 devices,
-            \item Reads from sensor,
-            \item Sends special byte,
-            \item Device connected to PC reads,
-            \item Bash script reads from device,
-            \item VBScript sends keystroke to PDF-reader.
+            \item 2 devices
+            \item Reads from sensor
+            \item Sends special byte
+            \item Device connected to PC reads
+            \item Bash script reads from device
+            \item VBScript sends keystroke to PDF-reader
             \item Effect: Can control slides from remote!
             \item (WCET without packetloss: 600 ms * 3 = 1800 ms)
         \end{itemize}
@@ -65,12 +65,12 @@
     \subsection{Lightshow}
     \begin{frame}[t]{Demonstration}\framesubtitle{Lightshow!}
         \begin{itemize}
-            \item 4 devices,
+            \item 4 devices
             \item Usercode!
-            \item Can start multiple at the same time,
-            \item Green LED on while sending,
-            \item Red LED on while receiving,
-            \item Multiple buttons turning on LEDs/actuators.
+            \item Can start multiple at the same time
+            \item Green LED on while sending
+            \item Red LED on while receiving
+            \item Multiple buttons turning on LEDs/actuators
             \item (Note: Timeslot is 2 x desired length for demonstrative purposes.)
         \end{itemize}
     \end{frame}
