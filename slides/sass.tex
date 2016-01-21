@@ -19,6 +19,8 @@
             \end{itemize}
     \end{itemize}
     \begin{figure}
+        \footnotesize
+        \centering
         \includegraphics[width=0.5\textwidth,trim={3cm 0.5cm 3cm 3cm},clip]{images/arduino_uno.jpg}
         \caption{Arduino Uno - 16 MHz, 2 KB SRAM}
     \end{figure}
@@ -42,11 +44,16 @@ How can a network of devices with radio transceivers of a single frequency commu
         \item<1-> How should we iterate?
         \item<2-> Verify new ideas and design
         \item<2-> Increasing complexity
-        \item<3-> Test driven development?
+        \item<3-> Testing hardware
+            \begin{itemize}
+                \item<3-> Establihing a baseline
+                \item<3-> Discarding faulty devices
+            \end{itemize}
+        \item<4-> Test driven development?
         \begin{itemize}
-            \item<3-> Difficult to test with hardware
-            \item<3-> Design needs to be implemented for test
-            \item<3-> Design flaws are caught late
+            \item<4-> Difficult to test with hardware
+            \item<4-> Design needs to be implemented for test
+            \item<4-> Design flaws are caught late
         \end{itemize}
     \end{itemize}
 \end{frame}
