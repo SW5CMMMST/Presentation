@@ -34,8 +34,8 @@
 	
 	\begin{itemize}
 		\item<+-> Better abstraction
-		\item<+-> Models are easier to check for logical errors
-		\item<+-> Models are easier to understand for non-programmers
+		\item<+-> Easier to check for logical errors
+		\item<+-> Easier to understand for non-programmers
 	\end{itemize}
 \end{frame}
 
@@ -48,7 +48,7 @@
 			every node/.style={align=center, draw, minimum width=60, minimum height=30},
 			>=stealth]
 	
-		\node(design) at (0,0) {Design};
+		\node(design) at (-1.5,0) {Design};
 		\node[rounded corners, fill = blue!20](model) at (4.5,0) {Model};
 		\node(generation) at(1.5,-2){Code\\Generation};
 		\node[rounded corners, fill = blue!20](code) at (4.5,-2){Code};
@@ -57,9 +57,8 @@
 		\draw[->] (design) -- (model);
 		\draw[->] (generation) -- (code);
 		
-		\draw[->] (design) to[bend left] (generation);
-		\draw[->] (generation) to[bend left] (evaluation);
-		\draw[->] (evaluation) to[bend left] (design);
+		\draw[->] (design) -| (generation);
+		\draw[->] (evaluation) -- (design);
 		
 		\draw[->] (model) -| +(1.5,-3) -| (evaluation);
 		\draw (code) -- +(1.5,0);
@@ -89,7 +88,7 @@
 		validation and verification of real-time systems modeled as networks of timed automata, 
 		extended with data types (bounded integers, arrays, etc.).''\footnote{http://www.uppaal.org/}
 	\end{block}
-	
+
 	\begin{columns}[T]
 		\begin{column}{.48\textwidth}
 			\begin{itemize}
@@ -102,17 +101,14 @@
 		\end{column}
 	\end{columns}
 	\medskip
-	\texttt{A[] forall (i:id\_t) forall (j:id\_t) P(i).cs \&\& P(j).cs imply i == j}
-\end{frame}
+	\texttt{A[] forall (i:id\_t) forall (j:id\_t) P(i).cs \&\& P(j).cs imply i == j}\end{frame}
 
 \subsection{SMC}
 \begin{frame}[t]{Model checking}
 	\framesubtitle{Statistical Model Checking (SMC)}
-	
 	\begin{columns}[T]
 		\begin{column}{.48\textwidth}
-			Some great thing
-			
+			Statistical Model Checking
 			\begin{itemize}
 				\item<+-> Some properties can not be guarenteed
 				\item<+-> What are the chances of those being true?
@@ -122,6 +118,6 @@
 			\includegraphics[trim=0 200 0 200,width=0.8\textwidth]{images/Simple_SMC.pdf}
 		\end{column}
 	\end{columns}
-	
+	\vspace{80pt}
 	\texttt{Pr[<=300000] (<> exists (i : id\_t) Coin(i).Tails)}
 \end{frame}
