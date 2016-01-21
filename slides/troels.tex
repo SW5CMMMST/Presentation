@@ -1,6 +1,6 @@
 \section{Implementation}
     \subsection{Automated Code Generation}
-    \begin{frame}[t]{Code Generation From Model}\framesubtitle{Hello World!}
+    \begin{frame}[t]{Code Generation From Model}\framesubtitle{Model Driven Development}
         Ideally
         \begin{enumerate}
             \item Make model,
@@ -27,8 +27,43 @@
         \end{itemize}
 
     \end{frame}
+    \begin{frame}[t]{Implementing for the Arduino}\framesubtitle{Usercode}
+        \begin{itemize}
+            \item \texttt{void userCodeRunonce()}
+            \begin{itemize}
+                \item Once pr. time-slot.
+                \item WCET must be less than the time set to execute user code in.
+            \end{itemize}
+            \item \texttt{void userCodeRepeat()}
+            \begin{itemize}
+                \item Used to fill the rest of the user code execution time.
+                \item WCET must be less than the guard time before transmitting.
+            \end{itemize}
+            \item \texttt{void userSensorPoll()}
+            \begin{itemize}
+                \item Can be enabled to pool sensor while receiving,
+                \item WCET should be short i.e. sub-millisecond. 
+            \end{itemize}
+        \end{itemize}
+
+    \end{frame}
+
 \section{Demonstration}
-    \begin{frame}[t]{Demonstration}
+    \subsection{Remote}
+    \begin{frame}[t]{Demonstration}\framesubtitle{Remote controlled presentation.}
+        \begin{itemize}
+            \item 2 devices,
+            \item Reads from sensor,
+            \item Sends special byte,
+            \item Device connected to PC reads,
+            \item Bash script reads from device,
+            \item VBScript sends keystroke to PDF-reader.
+            \item Effect: Can control slides from remote!
+            \item (WCET without packetloss: 600 ms * 3 = 1800 ms)
+        \end{itemize}
+    \end{frame}
+    \subsection{Lightshow}
+    \begin{frame}[t]{Demonstration}\framesubtitle{Lightshow!}
         \begin{itemize}
             \item 4 devices,
             \item Usercode!
@@ -36,5 +71,6 @@
             \item Green LED on while sending,
             \item Red LED on while receiving,
             \item Multiple buttons turning on LEDs/actuators.
+            \item (Note: Timeslot is 2 x desired length for demonstrative purposes.)
         \end{itemize}
     \end{frame}
